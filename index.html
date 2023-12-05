@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebAssembly Example</title>
+</head>
+<body>
+    <h1 >¡Hola desde WebAssembly!</h1>
+    <p id="result"></p>
+    <script>
+        const Module = {
+            onRuntimeInitialized: () => {
+                console.log("WebAssembly Loaded");
+
+                // Llamar a la función de suma definida en C/C++
+                const result = Module._add(5, 7);
+
+                // Mostrar el resultado en la página
+                document.getElementById('result').innerText = `Resultado de la suma: ${result}`;
+            }
+        };
+
+        // Cargar el archivo JavaScript generado por Emscripten
+        const script = document.createElement('script');
+        script.src = 'main.js';
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
